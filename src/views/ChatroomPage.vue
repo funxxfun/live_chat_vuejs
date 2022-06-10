@@ -10,7 +10,7 @@
 import NavbarPage from '../components/NavbarPage'
 import ChatWindow from '../components/ChatWindow'
 import NewChatForm from '../components/NewChatForm'
-import axios from 'axios'
+import axios from '../api/index'
 import ActionCable from 'actioncable'
 import { formatDistanceToNow } from 'date-fns'
 import { ja } from 'date-fns/locale'
@@ -34,7 +34,7 @@ export default {
   methods: {
     async getMessages () {
       try {
-        const res = await axios.get('http://localhost:3000/messages', {
+        const res = await axios().get('/messages', {
           headers: {
             uid: window.localStorage.getItem('uid'),
             "access-token": window.localStorage.getItem('access-token'),
@@ -45,7 +45,8 @@ export default {
           new Error('メッセージ一覧を取得できませんでした')
         }
         this.messages = res.data
-      } catch (err) {
+      } catch (err)
+      // eslint-disable-next-line no-console
         console.log(err)
       }
     },

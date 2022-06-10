@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../api/index'
 import removeItem from '../auth/removeItem'
 export default {
   data () {
@@ -25,7 +25,7 @@ export default {
     async logout () {
       this.error = null
       try {
-        const res = await axios.delete('http://localhost:3000/auth/sign_out', {
+        const res = await axios().delete('/auth/sign_out', {
           headers: {
             uid: this.email,
             "access-token": window.localStorage.getItem('access-token'),

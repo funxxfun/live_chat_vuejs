@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../api/index';
 import setItem from '../auth/setItem'
 export default {
   emits: ['redirectToChatRoom'],
@@ -27,7 +27,7 @@ export default {
      try {
        this.error = null
 
-       const res = await axios.post('http://localhost:3000/auth/sign_in', {
+       const res = await axios().post('/auth/sign_in', {
          email: this.email,
          password: this.password,
          }
@@ -42,6 +42,7 @@ export default {
        console.log({ res })
        return res
      } catch (error) {
+       // eslint-disable-next-line no-console
        console.log({ error })
        this.error = 'メールアドレスかパスワードが違います'
      }

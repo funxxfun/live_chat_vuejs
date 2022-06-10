@@ -19,70 +19,72 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../api/index';
 export default {
   emits: ['connectCable'],
   props: ['messages'],
   data () {
     return {
-      uid: localStorage.getItem('uid')
-    }
+      uid: localStorage.getItem('uid'),
+    };
   },
   methods: {
     handleLike (message) {
      for (let i = 0; i < message.likes.length; i++) {
-       const like = message.likes[i]
+       const like = message.likes[i];
        if (like.email === this.uid) {
-         this.deleteLike(like.id, message.id)
-         return
+         this.deleteLike(like.id);
+         return;
        }
      }
      this.createLike(message.id)
    },
     async createLike (messageId) {
       try {
-        const res = await axios.post(`http://localhost:3000/messages/${messageId}/likes`, {},
+        const res = await axios().post(`/messages/${messageId}/likes`, {},
           {
             headers: {
               uid: this.uid,
               "access-token": window.localStorage.getItem('access-token'),
-              client: window.localStorage.getItem('client')
-            }
-          })
+              client: window.localStorage.getItem('client'),
+            },
+          });
 
         if (!res) {
-          new Error('いいねできませんでした')
+          new Error('いいねできませんでした');
         }
-        this.$emit('connectCable')
+        this.$emit('connectCable');
       } catch (error) {
-        console.log(error)
+        // eslint-disable-next-line no-console
+        console.log(error);
       }
     },
     async deleteLike(likeId) {
       try {
-        const res = await axios.delete(`http://localhost:3000/likes/${likeId}`,
+        const res = await axios().delete(`/likes/${likeId}`,
           {
             headers: {
               uid: this.uid,
               "access-token": window.localStorage.getItem('access-token'),
               client: window.localStorage.getItem('client')
-            }
-          })
+            },
+          });
 
         if (!res) {
           new Error('いいねを削除できませんでした')
         }
         this.$emit('connectCable')
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.log(error)
       }
     },
     scrollToBottom () {
       const element = this.$refs.messages
       element.scrollTop = element.scrollHeight
-    }
+    },
   },
-}
+};
 </script>
 
 <style scoped>

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../api/index'
 import setItem from '../auth/setItem'
 export default {
   emits: ['redirectToChatRoom'],
@@ -30,7 +30,7 @@ export default {
     async signUp () {
       this.error = null
       try {
-        const res = await axios.post('http://localhost:3000/auth', {
+        const res = await axios().post('/auth', {
           name: this.name,
           email: this.email,
           password: this.password,
