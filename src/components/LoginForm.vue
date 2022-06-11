@@ -42,7 +42,6 @@ export default {
        console.log({ res })
        return res
      } catch (error) {
-       // eslint-disable-next-line no-console
        console.log({ error })
        this.error = 'メールアドレスかパスワードが違います'
      }

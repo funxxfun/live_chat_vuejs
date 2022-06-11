@@ -55,7 +55,6 @@ export default {
         }
         this.$emit('connectCable');
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.log(error);
       }
     },
@@ -75,7 +74,6 @@ export default {
         }
         this.$emit('connectCable')
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.log(error)
       }
     },

@@ -46,7 +46,6 @@ export default {
         }
         this.messages = res.data
       } catch (err)
-      // eslint-disable-next-line no-console
         console.log(err)
       }
     },
