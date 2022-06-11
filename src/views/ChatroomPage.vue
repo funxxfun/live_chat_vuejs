@@ -57,7 +57,7 @@ export default {
     }
   },
   mounted() {
-    const cable = ActionCable.createConsumer('ws://localhost:3000/cable')
+    const cable = ActionCable.createConsumer('wss://live-chat-rails-f.herokuapp.com/cable')
     this.messageChannel = cable.subscriptions.create('RoomChannel', {
       connected: () => {
         this.getMessages().then(() => {
